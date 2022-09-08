@@ -25,6 +25,9 @@ require (
 	github.com/googleapis/gax-go/v2 v2.4.0 // indirect
 	github.com/gorilla/handlers v1.5.1 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/nats-io/nats.go v1.16.0 // indirect
+	github.com/nats-io/nkeys v0.3.0 // indirect
+	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/pkg/xattr v0.4.8 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871 // indirect
