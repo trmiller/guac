@@ -40,7 +40,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1 // indirect
 	golang.org/x/sync v0.0.0-20220929204114-8fcdb60fdcc0 // indirect
 	golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/text v0.3.8 // indirect
 	golang.org/x/xerrors v0.0.0-20220609144429-65e65417b02f // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20220929141241-1ce7b20da813 // indirect
@@ -102,7 +102,7 @@ require (
 
 require (
 	github.com/CycloneDX/cyclonedx-go v0.7.0
-	github.com/ossf/scorecard/v4 v4.7.0
+	github.com/ossf/scorecard/v4 v4.8.0
 	github.com/sigstore/sigstore v1.4.3
 	github.com/spdx/tools-golang v0.3.1-0.20221003161519-fb7fe8874d01
 )
