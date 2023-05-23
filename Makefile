@@ -9,6 +9,9 @@ LDFLAGS="-X $(PKG).Version=$(VERSION) -X $(PKG).Commit=$(COMMIT) -X $(PKG).Date=
 
 CONTAINER ?= docker
 
+STIME = date '+%s' > $@_time
+ETIME = read st < $@_time ; echo $$((`date '+%s'`-$$st))
+
 .PHONY: all
 all: test cover fmt lint build generate
 
@@ -21,6 +24,10 @@ test: generate
 .PHONY: integration-test
 integration-test: generate check-env
 	go test -tags=integration ./...
+
+.PHONY: performance-test
+performance-test:
+	./internal/testing/performance/perf_test.sh
 
 .PHONY: check-env
 ifndef GITHUB_AUTH_TOKEN
