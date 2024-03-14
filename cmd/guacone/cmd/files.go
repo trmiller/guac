@@ -19,10 +19,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
 	"os"
 	"strings"
 	"time"
 
+	"github.com/Khan/genqlient/graphql"
+	"github.com/guacsec/guac/pkg/assembler/clients/generated"
+	"github.com/guacsec/guac/pkg/assembler/helpers"
 	"github.com/guacsec/guac/pkg/cli"
 	"github.com/guacsec/guac/pkg/collectsub/client"
 	csub_client "github.com/guacsec/guac/pkg/collectsub/client"
@@ -143,6 +147,24 @@ var filesCmd = &cobra.Command{
 		}
 
 		if err := collector.Collect(ctx, emit, errHandler); err != nil {
+			logger.Fatal(err)
+		}
+
+		httpClient := http.Client{}
+		gqlclient := graphql.NewClient(opts.graphqlEndpoint, &httpClient)
+
+		pkgInput, err := helpers.PurlToPkg("pkg:oci/guac_gitlab_runner_poc@sha256%3Aaf8e7906c6d9c50402cf6cbfec3028504ea1d54f1755ec50eaf9559b911e3766?arch=amd64&repository_url=registry.gitlab.com%2Fkusaridev%2Fguac_gitlab_runner_poc%2Fguac_gitlab_runner_poc")
+		if err != nil {
+			logger.Fatalf("failed to parse PURL: %v", err)
+		}
+
+		srcInput, err := helpers.VcsToSrc("https://gitlab.com/kusaridev/guac_gitlab_runner_poc")
+		if err != nil {
+			logger.Fatalf("failed to parse soruce: %v", err)
+		}
+
+		if _, err = generated.IngestHasSourceAt(ctx, gqlclient, generated.IDorPkgInput{PackageInput: pkgInput}, generated.MatchFlags{Pkg: generated.PkgMatchTypeSpecificVersion}, generated.IDorSourceInput{SourceInput: srcInput},
+			generated.HasSourceAtInputSpec{KnownSince: time.Now(), Justification: "obtained from gitlab runner", Origin: "gitlab runner", Collector: fileCollector.Type()}); err != nil {
 			logger.Fatal(err)
 		}
 
