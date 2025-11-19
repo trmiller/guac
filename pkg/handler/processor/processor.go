@@ -72,6 +72,7 @@ const (
 	DocumentCsaf               DocumentType = "CSAF"
 	DocumentOpenVEX            DocumentType = "OPEN_VEX"
 	DocumentIngestPredicates   DocumentType = "INGEST_PREDICATES"
+	DocumentGoMod              DocumentType = "GOMOD"
 	DocumentUnknown            DocumentType = "UNKNOWN"
 )
 
@@ -83,6 +84,7 @@ const (
 	FormatJSON      FormatType = "JSON"
 	FormatJSONLines FormatType = "JSON_LINES"
 	FormatXML       FormatType = "XML"
+	FormatGomod     FormatType = "GOMOD"
 	FormatUnknown   FormatType = "UNKNOWN"
 )
 

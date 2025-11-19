@@ -147,6 +147,9 @@ var (
 	//go:embed exampledata/cd-source-common-text.json
 	ITE6CDSourceCommonText []byte
 
+	//go:embed exampledata/example.mod
+	GoModExample []byte
+
 	//go:embed exampledata/certify-novuln.json
 	ITE6NoVulnExample []byte
 
@@ -503,6 +506,16 @@ var (
 		Blob:   []byte(ite6SLSA02),
 		Type:   processor.DocumentITE6SLSA,
 		Format: processor.FormatJSON,
+		SourceInformation: processor.SourceInformation{
+			Collector: "TestCollector",
+			Source:    "TestSource",
+		},
+	}
+
+	GoModDoc = processor.Document{
+		Blob:   GoModExample,
+		Type:   processor.DocumentGoMod,
+		Format: processor.FormatGomod,
 		SourceInformation: processor.SourceInformation{
 			Collector: "TestCollector",
 			Source:    "TestSource",
@@ -2253,7 +2266,13 @@ var (
 				"version": "0.0.14",
 				"result": [
 					{
+						"id": "GHSA-45p5-v273-3qqr"
+					},
+					{
 						"id": "GHSA-53jx-vvf9-4x38"
+					},
+					{
+						"id": "GHSA-h5fg-jpgr-rv9c"
 					}
 				]
 			},
